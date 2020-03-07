@@ -13,9 +13,16 @@ const errorHandler = err => {
 export default {
   service,
 
-  handleUpload (theFile) {
+  handleUpload(theFile) {
     // console.log('file in service: ', theFile);
     return service.post('/upload', theFile)
+      .then(res => res.data)
+      .catch(errorHandler);
+  },
+
+  saveNewThing(newThing) {
+    // console.log('new thing is: ', newThing)
+    return service.post('thing/create', newThing)
       .then(res => res.data)
       .catch(errorHandler);
   }
